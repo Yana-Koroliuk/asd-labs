@@ -3,6 +3,7 @@
 
 float func1(float x, float n, float i, float fi);
 struct Str func2(float x, float i);
+float func3(float x, float n, float i, float fi);
 float func4(float x);
 
 struct Str {
@@ -14,6 +15,7 @@ int main() {
     printf("Recursion_1 result: %f\n", func1(2, 5, 1, 1));
     struct Str res2 = func2(2, 5);
     printf("Recursion_2 result: %f\n", res2.sum);
+    printf("Recursion_3 result: %f\n", func3(2, 5, 1, 1));
     printf("Iteration result: %f\n", func4(2));
     printf("Correct result: %f", cos(2));
     return 0;
@@ -29,9 +31,7 @@ float func1(float x, float n, float i, float fi) {
     }
     float fiNext = (-fi) * (x*x/(4*(i-1)*(i-1) - 2*(i-1)));
     return fiNext + func1(x, n, i + 1, fiNext);
-
 }
-
 struct Str func2(float x, float i) {
     static struct Str result = {1, 1};
     if (i == 0) {
@@ -41,6 +41,18 @@ struct Str func2(float x, float i) {
     result.fi = fi;
     result.sum += fi;
     return result;
+}
+float func3(float x, float n, float i, float fi) {
+    if (n < i) {
+        return 0;
+    }
+    if (i == 1) {
+        float f1 = 1;
+        return f1 + func3(x, n, i + 1, f1);
+    }
+    float fiNext = (-fi) * (x*x/(4*(i-1)*(i-1) - 2*(i-1)));
+    float f = func3(x, n, i + 1, fiNext);
+    return f + fiNext;
 }
 
 float func4(float x) {
