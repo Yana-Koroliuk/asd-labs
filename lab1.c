@@ -34,10 +34,10 @@ float func1(float x, float n, float i, float fi) {
 }
 struct Str func2(float x, float i) {
     static struct Str result = {1, 1};
-    if (i == 0) {
+    if (i == 1) {
         return result;
     }
-    float fi = -func2(x, i-1).fi*x*x/(4*i*i-2*i);
+    float fi = -func2(x, i-1).fi*x*x/(4*(i-1)*(i-1) - 2*(i-1));
     result.fi = fi;
     result.sum += fi;
     return result;
@@ -56,10 +56,10 @@ float func3(float x, float n, float i, float fi) {
 }
 
 float func4(float x) {
-    int n = 10;
+    int n = 5;
     float res = 0;
     float fi = 1;
-    for (int i = 1; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         res += fi;
         float fi1 = (-fi*x*x)/(4*(float)i*(float)i-2*(float)i);
         fi = fi1;
