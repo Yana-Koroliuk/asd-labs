@@ -67,14 +67,18 @@ l_list * del_all(l_list *l_p) {
 }
 long long compute_expression(l_list *l_p) {
     long long result = 1;
-    l_list *last_l = l_p;
-    while (l_p->prev_p != 0) {
-        l_p = l_p->prev_p;
+    if (l_p->prev_p) {
+        l_list *last_l = l_p;
+        while (l_p->prev_p != 0) {
+            l_p = l_p->prev_p;
+        }
+        while (l_p->next_p != 0) {
+            result *= l_p->info + l_p->next_p->info + 2 *last_l->info;
+            l_p = l_p->next_p;
+            last_l = last_l->prev_p;
+        }
+        return result;
     }
-    while (l_p->next_p != 0) {
-        result *= l_p->info + l_p->next_p->info + 2*last_l->info;
-        l_p = l_p->next_p;
-        last_l = last_l->prev_p;
-    }
-    return result;
+    return l_p->info;
 }
+
