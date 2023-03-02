@@ -11,7 +11,7 @@ l_list *l_list_init(int item);
 l_list *add_list(l_list *l_p, int item);
 l_list *del_list(l_list *l_p);
 l_list * del_all(l_list *l_p);
-long long computeExpression(l_list *l_p);
+long long compute_expression(l_list *l_p);
 
 int main() {
     int n;
@@ -27,7 +27,7 @@ int main() {
             list_p = add_list(list_p, a);
         }
     }
-    printf("%lld\n",computeExpression(list_p));
+    printf("%lld\n",compute_expression(list_p));
     list_p = del_all(list_p);
     printf("%d\n", list_p);
     return 0;
@@ -65,7 +65,7 @@ l_list * del_all(l_list *l_p) {
     l_p = del_list(l_p);
     return l_p;
 }
-long long computeExpression(l_list *l_p) {
+long long compute_expression(l_list *l_p) {
     long long result = 1;
     l_list *last_l = l_p;
     while (l_p->prev_p != 0) {
