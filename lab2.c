@@ -3,14 +3,14 @@
 
 typedef struct linked_list {
     int info;
-    struct linked_list * next_p;
-    struct linked_list * prev_p;
+    struct linked_list *next_p;
+    struct linked_list *prev_p;
 } l_list;
 
 l_list *l_list_init(int item);
 l_list *add_list(l_list *l_p, int item);
 l_list *del_list(l_list *l_p);
-l_list * del_all(l_list *l_p);
+l_list *del_all(l_list *l_p);
 long long compute_expression(l_list *l_p);
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
             list_p = add_list(list_p, a);
         }
     }
-    printf("%lld\n",compute_expression(list_p));
+    printf("%lld\n", compute_expression(list_p));
     list_p = del_all(list_p);
     printf("%d\n", list_p);
     return 0;
@@ -58,13 +58,13 @@ l_list *del_list(l_list *l_p) {
     return node_p;
 }
 
-l_list * del_all(l_list *l_p) {
-    while (l_p->prev_p != 0) {
+l_list *del_all(l_list *l_p) {
+    while (l_p != NULL) {
         l_p = del_list(l_p);
     }
-    l_p = del_list(l_p);
     return l_p;
 }
+
 long long compute_expression(l_list *l_p) {
     long long result = 1;
     if (l_p->prev_p) {
@@ -73,7 +73,7 @@ long long compute_expression(l_list *l_p) {
             l_p = l_p->prev_p;
         }
         while (l_p->next_p != 0) {
-            result *= l_p->info + l_p->next_p->info + 2 *last_l->info;
+            result *= l_p->info + l_p->next_p->info + 2 * last_l->info;
             l_p = l_p->next_p;
             last_l = last_l->prev_p;
         }
